@@ -1,0 +1,27 @@
+{
+	"scripts": {
+		"build": "webpack",
+		"watch": "webpack --watch"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.22.5",
+		"@babel/preset-env": "^7.22.5",
+		"css-loader": "^6.8.1",
+		"i": "^0.3.7",
+		"npm": "^9.7.2",
+		"sass": "^1.71.1",
+		"sass-loader": "^14.1.1",
+		"style-loader": "^3.3.3",
+		"swiper": "^11.0.7",
+		"webpack-cli": "^5.1.4",
+		"webpack-stream": "^7.0.0"
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		]
+	},
+	"browserslist": [
+		"last 5 versions"
+	]
+}

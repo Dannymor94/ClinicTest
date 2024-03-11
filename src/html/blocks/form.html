@@ -1,0 +1,24 @@
+<div class="modalForm">
+  <div class="modalForm__cross">
+    <span class="modalForm__cross-item">+</span>
+  </div>
+  <form class="form" id="form" action="php/mail.php" method="post" autocomplete="on">
+     <div class="form__item">
+    <label for="name">Введите имя</label>
+    <input class="form__input js-input" type="text" name="name" placeholder="Как к Вам обращаться?" id="name">
+  </div>
+  <div class="form__item">
+    <label for="email">Укажите электронную почту</label>
+    <input class="form__input js-input js-input-email" type="text" name="email" id="email"placeholder="enter@mail.go">
+  </div>
+  <div class="form__item-checkbox">
+    <input class="form__input js-input js-input-checkbox" type="checkbox" checked name="checkbox" id="checkbox">
+    <label for="checkbox">Согласие на обработку персональных данных</label>
+  </div>
+  <button class='form__submit' type="submit" name="submit" form="form">
+    Отправить
+  </button>
+
+  </form>
+</div>
+

@@ -1,0 +1,87 @@
+.modalForm {
+  position: fixed;
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(246, 246, 246);
+  border-radius: 8px;
+  box-shadow: 0 0 3px 1px $color-dark;
+
+  @media (min-width: 1140px) {
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  z-index: 999;
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+
+}
+
+.modalForm__cross {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  transform: rotate(45deg);
+}
+
+.modalForm__cross-item {
+  font-weight: bold;
+  font-size: 40px;
+  color: $color-dark;
+
+  &:hover {
+    color: $color-light-accent;
+    cursor: pointer;
+  }
+}
+
+.form {
+  color: $color-dark;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+
+}
+
+.form__item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form__input {
+  border: $color-light-accent 1px solid;
+  padding: 8px;
+  border-radius: 5px;
+
+  &:focus {
+    outline: none;
+    border: $color-light-accent 1px solid;
+    box-shadow: 0 0 2px 1px $color-light-accent;
+  }
+
+}
+
+.form__submit {
+  @include btn;
+  @include btnAccent;
+}
+
+.error {
+  border: solid 1px red;
+}
