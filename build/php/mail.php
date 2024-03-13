@@ -1,15 +1,55 @@
-<?php 
-if(!empty($_POST)){
-  require_once __DIR__ . '/vendor/autoload.php';
-  $settings = require_once __DIR__ . '/setting.php';
-  require_once __DIR__ . '/functions.php';
+<?php
 
-  $name = $_POST['name'];
-  $email = $_POST['email'];
+$method = $_SERVER['REQUEST_METHOD'];
 
-  $body = "Имя и email оставившего заявку: " . $name . " " . $email;
-  send_mail($settings['mail_setting_prod'],['zazaebaka112@yandex.ru'],'Заявка с сайта',$body);
-};
-header("location: http://localhost/testClinicV2/index.html");
-exit();
+//Script Foreach
+$c = true;
+if ( $method === 'POST' ) {
+
+	$project_name = trim('Клиника');
+	$admin_email  = trim('clin@ipro.space'); // письма идут через почту хостинга так как напрямую не пропускает 
+	$form_subject = trim('Заявка с сайта');
+
+	foreach ( $_POST as $key => $value ) {
+		if ( $value != "" && $key != "project_name" && $key != "admin_email" && $key != "form_subject" ) {
+			$message .= "
+			" . ( ($c = !$c) ? '<tr>':'<tr style="background-color: #f8f8f8;">' ) . "
+				<td style='padding: 10px; border: #e9e9e9 1px solid;'><b>$key</b></td>
+				<td style='padding: 10px; border: #e9e9e9 1px solid;'>$value</td>
+			</tr>
+			";
+		}
+	}
+} else if ( $method === 'GET' ) {
+
+	$project_name = trim($_GET["project_name"]);
+	$admin_email  = trim($_GET["admin_email"]);
+	$form_subject = trim($_GET["form_subject"]);
+
+	foreach ( $_GET as $key => $value ) {
+		if ( $value != "" && $key != "project_name" && $key != "admin_email" && $key != "form_subject" ) {
+			$message .= "
+			" . ( ($c = !$c) ? '<tr>':'<tr style="background-color: #f8f8f8;">' ) . "
+				<td style='padding: 10px; border: #e9e9e9 1px solid;'><b>$key</b></td>
+				<td style='padding: 10px; border: #e9e9e9 1px solid;'>$value</td>
+			</tr>
+			";
+		}
+	}
+}
+
+$message = "<table style='width: 100%;'>$message</table>";
+
+function adopt($text) {
+	return '=?UTF-8?B?'.Base64_encode($text).'?=';
+}
+
+$headers = "MIME-Version: 1.0" . PHP_EOL .
+"Content-Type: text/html; charset=utf-8" . PHP_EOL .
+'From: '.adopt($project_name).' <'.$admin_email.'>' . PHP_EOL .
+'Reply-To: '.$admin_email.'' . PHP_EOL;
+
+mail($admin_email, adopt($form_subject), $message, $headers );
+  header("location: https://ipro.space");
+  exit;
 
